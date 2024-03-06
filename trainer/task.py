@@ -26,3 +26,17 @@ def get_model_definition(x_train):
     x = Dropout(rate=0.5)(x)
     outputs = Dense(10, activation="softmax")(x)
     return Model(inputs=inputs, outputs=outputs)
+
+from tensorflow.keras.datasets import mnist
+from scripts.helper import preprocess_data
+
+(x_train, labels_train), (x_test, labels_test) = mnist.load_data()
+x_train, y_train, x_test, y_test = preprocess_data(x_train, labels_train, x_test, labels_test)
+
+model = get_model_definition(x_train)
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+model.fit(
+    x_train, y_train, validation_data=(x_test, y_test), epochs=20, batch_size=256
+)
+BUCKET_ROOT='gcs/models-bucket-mnist'
+model.save(f'{BUCKET_ROOT}/model_output')
