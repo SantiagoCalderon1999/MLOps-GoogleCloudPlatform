@@ -56,7 +56,7 @@ jobs:
 
       - name: Push Docker image to repository
         run: |
-            docker push ${{ secrets.IMAGE_URI }}
+          docker push ${{ secrets.IMAGE_URI }}
 
 
   train:
@@ -73,4 +73,4 @@ jobs:
           CONTAINER_URI: ${{ secrets.CONTAINER_URI }}
           VERTEX_AI_JOB: ${{ secrets.VERTEX_AI_JOB_NAME }}
           MACHINE_TYPE: ${{secrets.VERTEX_AI_MACHINE_TYPE}}
-        run: python pipeline/train-model.py --bucket $BUCKET_NAME --container_uri $CONTAINER_URI --vertex_ai_job $VERTEX_AI_JOB --machine_type $MACHINE_TYPE
+        run: python ../pipeline/train-model.py --bucket $BUCKET_NAME --container_uri $CONTAINER_URI --vertex_ai_job $VERTEX_AI_JOB --machine_type $MACHINE_TYPE
