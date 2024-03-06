@@ -21,7 +21,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     environment:
-        name: 'Training'
+        name: 'testing'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -39,7 +39,7 @@ jobs:
       - name: Authenticate Google Cloud Platform
         uses: google-github-actions/setup-gcloud@v0.3.0
         with:
-          project_id: 'my-project'
+          project_id: ${{ secrets.PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT }}
   
 
