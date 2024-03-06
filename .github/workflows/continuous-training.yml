@@ -24,7 +24,7 @@ jobs:
     environment:
       name: "testing"
     steps:
-      - uses: ./.github/workflows/python_setup_template.yml
+      - uses: SantiagoCalderon1999/MLOps-GoogleCloudPlatform/.github/workflows/python_setup_template.yml
         with:
           job: common-setup-python
       - name: Configure Docker authentication
@@ -44,7 +44,7 @@ jobs:
     environment:
       name: "testing"
     steps:
-      - uses: ./.github/workflows/python_setup_template.yml
+      - uses: SantiagoCalderon1999/MLOps-GoogleCloudPlatform/.github/workflows/python_setup_template.yml
         with:
           job: common-setup-python
       - name: Execute Python script for model retraining
@@ -62,7 +62,7 @@ jobs:
     environment:
       name: "testing"
     steps:
-      - uses: ./.github/workflows/python_setup_template.yml
+      - uses: SantiagoCalderon1999/MLOps-GoogleCloudPlatform/.github/workflows/python_setup_template.yml
         with:
           job: common-setup-python
       - name: Execute Python script for model deployment
