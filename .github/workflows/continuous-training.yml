@@ -8,6 +8,7 @@ on:
 
 jobs:
   build:
+    name: 'Build'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -17,10 +18,8 @@ jobs:
         run: |
           python -m compileall .
 
-
-          
-
   image-delivery:
+    name: 'Docker Image Delivery'
     needs: build
     runs-on: ubuntu-latest
     environment:
@@ -53,13 +52,14 @@ jobs:
 
       - name: Push Docker image to repository
         run: |
-          docker push ${{ secrets.CONTAINER_URI }}
+            docker push ${{ secrets.IMAGE_URI }}
 
       - name: Build Docker image
         run: |
-          docker build ./ -t ${{ secrets.CONTAINER_URI }}
+          docker build ./ -t ${{ secrets.IMAGE_URI }}
 
   train:
+    name: 'Train'
     needs: [build, image-delivery]
     runs-on: ubuntu-latest
     environment:
