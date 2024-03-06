@@ -47,11 +47,6 @@ jobs:
       - name: 'Set up Cloud SDK'
         uses: 'google-github-actions/setup-gcloud@v2'  
 
-      - name: Create Docker repository
-        run: |
-          gcloud artifacts repositories create ${{ secrets.GCP_IMAGE_REPOSITORY_NAME }} --repository-format=docker \
-            --location=${{ secrets.GCP_REGION }} --description="Docker repository"
-
       - name: Configure Docker authentication
         run: |
           gcloud auth configure-docker ${{ secrets.GCP_DOCKER_CONFIGURATION }}
