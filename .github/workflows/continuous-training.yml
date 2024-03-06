@@ -1,0 +1,35 @@
+name: Retrain model
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    environment:
+        name: 'Testing'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9.7'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Execute Python script for model retraining
+        env:
+          BUCKET_NAME: ${{ secrets.BUCKET_NAME }}
+          CONTAINER_URI: ${{ secrets.CONTAINER_URI }}
+          VERTEX_AI_JOB: ${{ secrets.VERTEX_AI_JOB_NAME }}
+          MACHINE_TYPE: ${{secrets.VERTEX_AI_MACHINE_TYPE}}
+        run: python pipeline/train-model.py --bucket $BUCKET_NAME --container_uri $CONTAINER_URI --vertex_ai_job $VERTEX_AI_JOB --machine_type $MACHINE_TYPE
+

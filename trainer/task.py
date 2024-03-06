@@ -38,5 +38,5 @@ model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accur
 model.fit(
     x_train, y_train, validation_data=(x_test, y_test), epochs=20, batch_size=256
 )
-BUCKET_ROOT='gcs/models-bucket-mnist'
+BUCKET_ROOT='gcs/models-mnist-training'
 model.save(f'{BUCKET_ROOT}/model_output')
