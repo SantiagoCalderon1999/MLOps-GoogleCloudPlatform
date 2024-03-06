@@ -36,12 +36,13 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Authenticate Google Cloud Platform
-        uses: google-github-actions/setup-gcloud@v0.3.0
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v2'
         with:
-          project_id: ${{ secrets.PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT }}
-  
+            credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v2'  
 
       - name: Execute Python script for model retraining
         env:
