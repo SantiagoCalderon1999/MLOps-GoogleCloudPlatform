@@ -50,13 +50,14 @@ jobs:
         run: |
           gcloud auth configure-docker ${{ secrets.GCP_DOCKER_CONFIGURATION }}
 
+      - name: Build Docker image
+        run: |
+          docker build ./ -t ${{ secrets.IMAGE_URI }}
+
       - name: Push Docker image to repository
         run: |
             docker push ${{ secrets.IMAGE_URI }}
 
-      - name: Build Docker image
-        run: |
-          docker build ./ -t ${{ secrets.IMAGE_URI }}
 
   train:
     name: 'Train'
