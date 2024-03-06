@@ -123,4 +123,4 @@ jobs:
         uses: "google-github-actions/setup-gcloud@v2"
 
       - name: Execute Python script for model deployment
-        run: python pipeline/deploy-model.py --bucket_name ${{ secrets.BUCKET_NAME }} --serving_container_image_uri ${{ secrets.CONTAINER_URI }} --project_id ${{ secrets.PROJECT_ID }}
+        run: python pipeline/deploy-model.py --bucket_name ${{ secrets.BUCKET_NAME }} --serving_container_image_uri ${{ secrets.SERVING_CONTAINER_URI }} --project_id ${{ secrets.PROJECT_ID }}
